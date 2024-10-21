@@ -1,0 +1,37 @@
+{
+  "name": "mx.edu.utxj.ti.awos.bienes-raices",
+  "version": "1.0.0",
+  "description": "Proyecto de Clase para la Unidad 2, de la asignatura AWOS utilizando Node.js",
+  "main": "index.js",
+  "scripts": {
+    "saluda": "node saluda.js",
+    "server": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Josue-Martinez-Otero/BienesRaices_230166.git"
+  },
+  "keywords": [
+    "MVC",
+    "Express",
+    "Sequelize",
+    "MySQL",
+    "Tailwind",
+    "Nodemon",
+    "NodeJS",
+    "Mailtrap",
+    "JWT"
+  ],
+  "author": "Josue Atlai Martinez Otero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Josue-Martinez-Otero/BienesRaices_230166/issues"
+  },
+  "homepage": "https://github.com/Josue-Martinez-Otero/BienesRaices_230166#readme",
+  "dependencies": {
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
