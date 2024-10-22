@@ -1,4 +1,6 @@
-import express from 'express'
+import express from 'express';
+import generalRoutes from './routers/generalRoutes.js'
+import userRoutes from './routers/userRoutes.js'
 //const express = require(`express`); // Importar la libreria para crear un servidor web- CommonJS
 
 // Instanciar nuestra aplicación web
@@ -10,16 +12,9 @@ app.listen(port, ()=>{
    console.log(`La aplicación ha iniciado en el puesto: ${port}`);
 })
 
+//Routing - Enrutamiento.
+app.use('/',generalRoutes);
+app.use('/usuario',userRoutes);
 // Probamos las rutas para poder presentar mensajes al usuario a través del navegador
-app.get("/", function(req, res){
-    res.send("Hola Mundo desde Node, a travé s del Navegador")
-})
 
-app.get("/QuienSoy", function(req, res){
-    res.json({"estudiante": "Josue Atlai Martinez Otero", 
-        "carrera": "TI DSM",
-        "grado": "4°",
-        "grupo": "B",
-        "asignatura": "Aplicaciones Web Orientada a Servicios (AWOS)"
-    })
-})
+
