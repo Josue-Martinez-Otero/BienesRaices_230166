@@ -1,4 +1,5 @@
-const express = require(`express`); // Importar la libreria para crear un servidor web
+import express from 'express'
+//const express = require(`express`); // Importar la libreria para crear un servidor web- CommonJS
 
 // Instanciar nuestra aplicación web
 const app = express()
