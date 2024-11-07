@@ -9,6 +9,8 @@ const formularioRegister = (request, response) =>  {
              page : "Crea una nueva cuenta..."
         })};
 
+ 
+
 const formularioPasswordRecovery = (request, response) =>  {
     response.render('auth/passwordRecovery', {
             page : "Recuperación de Contraseña"

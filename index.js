@@ -2,10 +2,20 @@ const router = express.Router();
 import express from 'express';
 import generalRoutes from './routers/generalRoutes.js'
 import userRoutes from './routers/userRoutes.js'
+import db from './config/db.js'
 //const express = require(`express`); // Importar la libreria para crear un servidor web- CommonJS
 
 // Instanciar nuestra aplicación web
 const app = express()
+
+//Conexión a la base de datos
+try {
+    await db.authenticate();
+
+}catch (error) {
+    console.log(error)
+}
+
 
 //Habilitar PUG
 app.set('view engine','pug');
