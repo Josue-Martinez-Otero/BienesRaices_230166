@@ -1,5 +1,5 @@
 import express from 'express';
-
+import { formularioLogin, formularioRegister, formularioPasswordRecovery } from '../controllers/userController.js'
 const router = express.Router();
 
 //GET - Se utiliza para la lectura de datos e información del servidor al cliente 
@@ -44,4 +44,10 @@ router.patch("/updatePassword/:email/:newPassword/:newPasswordConfirm", function
 router.delete("/deleteUser/:email", function(request, response){
     response.send(`Se ha solicitado la eliminación del usuario asociado al correo: ${request.params.email}`)
 })
+
+router.get("/login", formularioLogin /*middleware*/ )
+ router.get("/createAccount", formularioRegister)
+ router.get("/passwordRecovery", formularioPasswordRecovery)
+ 
+
 export default router
