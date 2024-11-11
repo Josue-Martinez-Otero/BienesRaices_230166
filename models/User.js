@@ -19,4 +19,4 @@ const User = db.define('tbb_users',{
     confirmado: DataTypes.BOOLEAN
 })
 
-export default User
+export default db

@@ -20,7 +20,7 @@ const formularioPasswordRecovery = (request, response) =>  {
             page : "Recuperación de Contraseña"
      })};
 
-     const createNewUser=(request,response)=>{
+     const createNewUser= async(request,response)=>{
           console.log("Registrando a nuevo usuario");
           console.log(request.body);
 
