@@ -1,5 +1,5 @@
 import express from 'express';
-import { formularioLogin, formularioRegister, formularioPasswordRecovery } from '../controllers/userController.js'
+import { formularioLogin, formularioRegister, formularioPasswordRecovery, createNewUser } from '../controllers/userController.js'
 const router = express.Router();
 
 //GET - Se utiliza para la lectura de datos e información del servidor al cliente 
@@ -11,10 +11,7 @@ router.get("/busquedaPorID/:id", function (request,response){
 })  // 2 componentes de una petición ruta, función callback 
 
 //POST - Se utiliza para el envío de datos e información del cliente al servidor
-router.post("/newUser/:name/:email/:password", function(req, res){
-    res.send(`Se ha solicitado la creación de un nuevo usuario de nombre: ${req.params.name},
-        asociado al correo electronico: ${req.params.email} con la contraseña: ${req.params.password}`)
-})
+router.post("/newUser", createNewUser)
 
 //PUT - Se utiliza para la actualización total de información del cliente al servidor
 router.put("/replaceUserByEmail/:name/:email/:password", function(a,b){
