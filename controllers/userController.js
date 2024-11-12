@@ -1,6 +1,8 @@
-import User from '../models/User.js'
+import {check, validationResult} from 'express-validator'
+import User from '../models/User.js' 
 
 import { request, response } from "express";
+import req from 'express/lib/request.js';
 
 const formularioLogin = (request, response) =>  {
     response.render('auth/login', {
@@ -21,16 +23,35 @@ const formularioPasswordRecovery = (request, response) =>  {
      })};
 
      const createNewUser= async(request,response)=>{
-          console.log("Registrando a nuevo usuario");
-          console.log(request.body);
-
-          //Registro a los datos en la base de datos.
-          const newUser = await User.create({
+           
+            //Validación de los campos que se reciben del formulario
+            await check('nombre_usuario').notEmpty().withMessage("El nombre del usuario es un campo obligatorio.").run(request)
+            await check('correo_usuario').notEmpty().withMessage("El correo electrónico es un campo obligatorio.").isEmail().withMessage("").run(request)
+            await check('password_usuario').notEmpty().withMessage("La contraseña es un campo obligatorio.").isLength({min:8}).withMessage("La contraseña debe ser de almenos 8 carácteres.").run(request)
+            await check('pass2_usuario').equals(request.body.password_usuario).withMessage("La contraseñay su confirmaci´pn deben coincidir").run(request)
+            let result = validationResult(request)
+           // response.json(resultado.array());
+        
+                //Verificación si hay errores de validaciones
+            if(!result.isEmpty())
+            {
+               return response.render("auth/register", {
+                   page: 'Error al intentar crear la Cuenta de Usuario',
+                   errors: result.array() 
+               })
+            }
+            else{
+                console.log("Registrando a nuevo usuario");
+                console.log(request.body);
+            }
+           //Registro a los datos en la base de datos.
+            const newUser = await User.create({
             name: request.body.nombre_usuario,
             email: request.body.correo_usuario,
-            password: request.body.pass_usuario,
+            password: request.body.password_usuario,
           });
           response.json(newUser);
      }
+
 
 export {formularioLogin, formularioRegister, formularioPasswordRecovery, createNewUser}

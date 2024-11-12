@@ -19,7 +19,7 @@ try {
 }
 
 //Habilitando la lectura de datos del formulario
-app.use(express.urlencoded({ encoded: true }));
+app.use(express.urlencoded({ extended: true }));
 
 
 //Habilitar PUG
