@@ -1,5 +1,5 @@
 import express from 'express';
-import { formularioLogin, formularioRegister, formularioPasswordRecovery, createNewUser } from '../controllers/userController.js'
+import { formularioLogin, formularioRegister, formularioPasswordRecovery, createNewUser, confirm } from '../controllers/userController.js'
 const router = express.Router();
 
 //GET - Se utiliza para la lectura de datos e información del servidor al cliente 
@@ -45,6 +45,7 @@ router.delete("/deleteUser/:email", function(request, response){
 router.get("/login", formularioLogin /*middleware*/ )
  router.get("/createAccount", formularioRegister)
  //router.post("/createAccount", Register)
+ router.get("/confirmAccout/:token",confirm) 
  router.get("/passwordRecovery", formularioPasswordRecovery)
  
 

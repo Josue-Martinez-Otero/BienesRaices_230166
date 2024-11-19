@@ -1,0 +1,189 @@
+Microsoft Windows [Versión 10.0.22631.4249]
+(c) Microsoft Corporation. Todos los derechos reservados.
+
+C:\Users\ti_la>cd /
+
+C:\>cd "program files"
+
+C:\Program Files>cd mysql
+
+C:\Program Files\MySQL>cd "mysql server 8.0"
+
+C:\Program Files\MySQL\MySQL Server 8.0>cd bin
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u root -p --port=3307
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE USER Karen.Negrete'%' IDENTIFIED BY '061005'
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.Negrete'%' IDENTIFIED BY '061005'' at line 1
+mysql> CREATE USER Karen.Negrete'@'%' IDENTIFIED BY '061005';
+    '> '
+    -> CREATE USER 'Karen.Negrete'@'%' IDENTIFIED BY '061005';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.Negrete'@'%' IDENTIFIED BY '061005';
+'
+CREATE USER 'Karen.Negrete'@'%' IDENTIFI' at line 1
+mysql> CREATE USER 'Karen.Negrete'@'%' IDENTIFIED BY 'karen061005';
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> CREATE DATABASE bienes_raices_230570
+    -> CREATE DATABASE bienes_raices_230570;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CREATE DATABASE bienes_raices_230570' at line 2
+mysql> CREATE DATABASE bienes_raices_230570;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> GRANT SELECT, UPDATE, INSERT, DELETE, ALTER, CREATE, DROP PRIVILEGES ON bienes_raices_230570.* TO 'Karen.Negrete'
+@'%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'PRIVILEGES ON bienes_raices_230570.* TO 'Karen.Negrete'@'%'' at line 1
+mysql> GRANT SELECT, UPDATE, INSERT, DELETE, ALTER, CREATE, DROP ON bienes_raices_230570.* TO 'Karen.Negrete'@'%';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SHOW GRANTs FOR Karen.Negrete'@'%';
+    '> ´'
+    -> '
+    '> '
+    -> SHOW GRANTs FOR 'Karen.Negrete'@'%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.Negrete'@'%';
+´'
+'
+'
+SHOW GRANTs FOR 'Karen.Negrete'@'%'' at line 1
+mysql> SHOW GRANTs FOR 'Karen.Negrete'@'%';
++--------------------------------------------------------------------------------------------------------------+
+| Grants for Karen.Negrete@%                                                                                   |
++--------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `Karen.Negrete`@`%`                                                                    |
+| GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER ON `bienes_raices_230570`.* TO `Karen.Negrete`@`%` |
++--------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> exir
+    -> ^C
+mysql> exit
+Bye
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u Karen.Negrete -p --port=3307
+Enter password: ***********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++----------------------+
+| Database             |
++----------------------+
+| bienes_raices_230570 |
+| information_schema   |
+| performance_schema   |
++----------------------+
+3 rows in set (0.02 sec)
+
+mysql>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Microsoft Windows [Versión 10.0.22631.4249]
+(c) Microsoft Corporation. Todos los derechos reservados.
+
+C:\Users\ti_la>cd /
+
+C:\>cd "program files"
+
+C:\Program Files>cd mysql
+
+C:\Program Files\MySQL>cd "mysql server 8.0"
+
+C:\Program Files\MySQL\MySQL Server 8.0>cd bin
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u root -p --port=3307
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE USER 'Karen.Negrete'@'%' IDENTIFIED BY 'karen061005';
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE DATABASE bienes_raices_230570;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> GRANT SELECT, UPDATE, INSERT, DELETE, ALTER, CREATE, DROP ON bienes_raices_230570.* TO 'Karen.Negrete'@'%';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SHOW GRANTs FOR 'Karen.Negrete'@'%';
++--------------------------------------------------------------------------------------------------------------+
+| Grants for Karen.Negrete@%                                                                                   |
++--------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `Karen.Negrete`@`%`                                                                    |
+| GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER ON `bienes_raices_230570`.* TO `Karen.Negrete`@`%` |
++--------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql>  exit
+Bye
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u Karen.Negrete -p --port=3307
+Enter password: ***********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++----------------------+
+| Database             |
++----------------------+
+| bienes_raices_230570 |
+| information_schema   |
+| performance_schema   |
++----------------------+
+3 rows in set (0.01 sec)
+
+mysql>
