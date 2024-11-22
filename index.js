@@ -4,7 +4,8 @@ import generalRoutes from './routers/generalRoutes.js'
 import userRoutes from './routers/userRoutes.js'
 import db from './db/config.js'
 import dotenv from 'dotenv'
-
+import csrf from 'csurf'
+import cookieParser from 'cookie-parser';
 
 dotenv.config({path: '.env'})
 //const express = require(`express`); // Importar la libreria para crear un servidor web- CommonJS
@@ -21,6 +22,11 @@ try {
 }catch (error) {
     console.log(error)
 }
+// Habilitar Cookie Parser 
+app.use(cookieParser())
+
+// Habilitar CSRF
+app.use(csrf({cookie: true}))
 
 //Habilitando la lectura de datos del formulario
 app.use(express.urlencoded({ extended: true }));

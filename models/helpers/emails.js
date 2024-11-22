@@ -25,7 +25,7 @@ dotenv.config({path: '.env'})
         html: `<p> Hola, <span style="color: red"> ${name}</span>, <br>
         Bienvenido a la plataforma de BienesRaices, el sitio seguro donde podrás buscar, comprar y ofertar propiedades a través de internet.
         <br>
-        <p> Ya solo necesitamos confirmar la cuenta que creaste, dando click a la siguiente liga: <a href:"${process.env.BACKED_HOST}:${process.env.BACKEND_PORT}/confirmAccout/${token}">Confirmar cuenta</a></p>` 
+        <p> Ya solo necesitamos confirmar la cuenta que creaste, dando click a la siguiente liga: <a href="${process.env.BACKED_DOMAIN}:${process.env.BACKEND_PORT}/confirmAccout/${token}">Confirmar cuenta</a></p>` 
 
     })
 }

@@ -45,7 +45,7 @@ router.delete("/deleteUser/:email", function(request, response){
 router.get("/login", formularioLogin /*middleware*/ )
  router.get("/createAccount", formularioRegister)
  //router.post("/createAccount", Register)
- router.get("/confirmAccout/:token",confirm) 
+ router.get("/confirmAccount/:token",confirm) 
  router.get("/passwordRecovery", formularioPasswordRecovery)
  
 

@@ -11,7 +11,8 @@ const formularioLogin = (request, response) => {
 
 const formularioRegister = (request, response) => {
     response.render('auth/register', {
-        page: "Crea una nueva cuenta..."
+        page: "Crea una nueva cuenta...",
+        csrfToken: request.csrfToken()
     });
 };
 
@@ -31,6 +32,7 @@ const createNewUser = async (request, response) => {
     if (existingUser) {
         return response.render("auth/register", {
             page: "Error al intentar crear la cuenta de Usuario",
+            csrfToken: request.csrfToken(),
             errors: [{ msg: `El usuario ${correo_usuario} ya se encuentra registrado` }],
             user: { name: nombre_usuario }  // Use nombre_usuario here
         });
@@ -84,16 +86,45 @@ const createNewUser = async (request, response) => {
     });
 
     // Mostrar mensaje de confirmación
-    return response.render('templates/message');
+    response.render('templates/message', {
+        csrfToken: request.csrfToken(),
+        page: 'Cuenta creada satisfactoriamente.',
+        msg: `Hemos enviado un correo a: ${correo_usuario}, para la confirmación de su cuenta.` 
+        });
+    
 };
 
 // Confirmación de cuenta
-const confirm = (request, response) => {
+const confirm = async (request, response) => {
     const { token } = request.params;
     console.log(`Intentando confirmar la cuenta con el token: ${token}`);
 
     // Validar token, confirmar cuenta y enviar mensaje
     // Aquí se puede agregar la lógica para confirmar la cuenta
+    const userWithToken = await User.findOne({where: {token}});
+
+    if(!userWithToken){
+        response.render('auth/accountConfirmed', {
+            page: 'Error al confirmar tu cuenta.',
+            msg: 'El token no existe o ya ha sido utilizado, intenta de nuevo.',
+            error: true
+        })
+    }
+    else
+    {
+        userWithToken.token=null
+        userWithToken.confirmed=true;
+        await userWithToken.save();
+
+        response.render('auth/accountConfirmed', {
+            page: 'Excelente..!',
+            msg: 'Tu cuenta ha sido confirmada de manera exitosa.',
+            error: false
+        })
+
+    }
+    
+
 };
 
 export { formularioLogin, formularioRegister, formularioPasswordRecovery, createNewUser, confirm };
