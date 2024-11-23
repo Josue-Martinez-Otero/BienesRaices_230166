@@ -1,11 +1,11 @@
-const router = express.Router();
+//const router = express.Router();
 import express from 'express';
 import generalRoutes from './routers/generalRoutes.js'
 import userRoutes from './routers/userRoutes.js'
 import db from './db/config.js'
 import dotenv from 'dotenv'
-import csrf from 'csurf'
-import cookieParser from 'cookie-parser';
+//import csrf from 'csurf'
+//import cookieParser from 'cookie-parser';
 
 dotenv.config({path: '.env'})
 //const express = require(`express`); // Importar la libreria para crear un servidor web- CommonJS
@@ -23,10 +23,10 @@ try {
     console.log(error)
 }
 // Habilitar Cookie Parser 
-app.use(cookieParser())
+//app.use(cookieParser())
 
 // Habilitar CSRF
-app.use(csrf({cookie: true}))
+//app.use(csrf({cookie: true}))
 
 //Habilitando la lectura de datos del formulario
 app.use(express.urlencoded({ extended: true }));
@@ -53,7 +53,7 @@ app.use('/auth',userRoutes);
 app.get("/",function(req,res){
     res.send("Hola Mundo desde node, a traves del navegador")
 })
-app.use('/',generalRoutes)
-app.use('/auth',userRoutes)
-export default router;
+app.use('/',generalRoutes);
+app.use('/auth',userRoutes);
+//export default router;
 

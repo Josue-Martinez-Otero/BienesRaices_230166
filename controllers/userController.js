@@ -12,7 +12,7 @@ const formularioLogin = (request, response) => {
 const formularioRegister = (request, response) => {
     response.render('auth/register', {
         page: "Crea una nueva cuenta...",
-        csrfToken: request.csrfToken()
+
     });
 };
 
@@ -32,7 +32,6 @@ const createNewUser = async (request, response) => {
     if (existingUser) {
         return response.render("auth/register", {
             page: "Error al intentar crear la cuenta de Usuario",
-            csrfToken: request.csrfToken(),
             errors: [{ msg: `El usuario ${correo_usuario} ya se encuentra registrado` }],
             user: { name: nombre_usuario }  // Use nombre_usuario here
         });
@@ -87,7 +86,6 @@ const createNewUser = async (request, response) => {
 
     // Mostrar mensaje de confirmación
     response.render('templates/message', {
-        csrfToken: request.csrfToken(),
         page: 'Cuenta creada satisfactoriamente.',
         msg: `Hemos enviado un correo a: ${correo_usuario}, para la confirmación de su cuenta.` 
         });

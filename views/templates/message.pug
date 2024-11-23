@@ -1,9 +1,10 @@
 extends ../layout/index
 
-block contenido
-     div.py-10 
-        h2.text-center.font-extrabold.my-10.text-4xl.text-flax Bienes
-            span.font-normal.text-negro Raices
-        h2.text-center.font-extrabold.text-2xl=page 
+block contenido 
+    //input(type="hidden" name="_csrf" value=csrfToken)
+    .py-10 
+        h1.text-center.text-4xl.my-10.font-extrabold.text-indigo-600 Bienes
+            span.font-normal.text-black Raíces
+        h2.text-center.font-extrabold.text-2xl=page
 
-        p.text-xl.font-bold.text-center.my-10=msg 
+        p.text-xl.font-bold.text-center.my-10.text-red-700=msg
