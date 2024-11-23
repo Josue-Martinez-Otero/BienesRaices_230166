@@ -23,8 +23,7 @@ const formularioPasswordRecovery = (request, response) => {
 };
 
 const createNewUser = async (request, response) => {
-    // Desestructurar los parámetros del request
-    const { nombre_usuario, correo_usuario, password_usuario } = request.body;
+    const { nombre_usuario, correo_usuario, password_usuario, fecha_nacimiento_usuario } = request.body;
 
     // Verificar que el usuario no existe previamente en la bd
     const existingUser = await User.findOne({ where: { email: correo_usuario } });
@@ -33,7 +32,7 @@ const createNewUser = async (request, response) => {
         return response.render("auth/register", {
             page: "Error al intentar crear la cuenta de Usuario",
             errors: [{ msg: `El usuario ${correo_usuario} ya se encuentra registrado` }],
-            user: { name: nombre_usuario }  // Use nombre_usuario here
+            user: { name: nombre_usuario }
         });
     }
 
@@ -56,6 +55,13 @@ const createNewUser = async (request, response) => {
         .equals(request.body.password_usuario).withMessage("La contraseña y su confirmación deben coincidir.")
         .run(request);
 
+    // Validación para la fecha de nacimiento
+    await check('fecha_nacimiento_usuario')
+        .notEmpty().withMessage("La fecha de nacimiento es un campo obligatorio.")
+        .isDate().withMessage("Debe ingresar una fecha válida.")
+        .isBefore(new Date().toISOString()).withMessage("La fecha de nacimiento no puede ser una fecha futura.")
+        .run(request);
+
     let result = validationResult(request);
 
     // Verificación si hay errores de validaciones
@@ -71,10 +77,11 @@ const createNewUser = async (request, response) => {
 
     // Registro a los datos en la base de datos.
     const newUser = await User.create({
-        name: nombre_usuario,  // Use nombre_usuario here
+        name: nombre_usuario,
         email: correo_usuario,
         password: password_usuario,
-        token: generatetId()   // Generate token here
+        dateOfBirth: fecha_nacimiento_usuario,  // Registrar la fecha de nacimiento
+        token: generatetId()
     });
 
     // Enviar el correo de confirmación
@@ -88,8 +95,7 @@ const createNewUser = async (request, response) => {
     response.render('templates/message', {
         page: 'Cuenta creada satisfactoriamente.',
         msg: `Hemos enviado un correo a: ${correo_usuario}, para la confirmación de su cuenta.` 
-        });
-    
+    });
 };
 
 // Confirmación de cuenta
