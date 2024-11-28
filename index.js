@@ -1,5 +1,11 @@
+
 //const router = express.Router();
+//Librerias Globales
 import express from 'express';
+import csrf from 'csurf'
+import cookieParser from 'cookie-parser';
+
+//librerias especificoas del proyecto
 import generalRoutes from './routers/generalRoutes.js'
 import userRoutes from './routers/userRoutes.js'
 import db from './db/config.js'
@@ -12,6 +18,12 @@ dotenv.config({path: '.env'})
 
 // Instanciar nuestra aplicación web
 const app = express()
+
+// Habilitar Cookie Parser 
+app.use(cookieParser())
+
+// Habilitar CSRF
+app.use(csrf({cookie: true}))
 
 //Conexión a la base de datos
 try {
@@ -56,4 +68,3 @@ app.get("/",function(req,res){
 app.use('/',generalRoutes);
 app.use('/auth',userRoutes);
 //export default router;
-

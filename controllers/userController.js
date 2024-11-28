@@ -2,6 +2,7 @@ import { check, validationResult } from 'express-validator';
 import User from '../models/User.js';
 import { generatetId } from '../models/helpers/tokens.js';
 import { emailAfterRegister } from '../models/helpers/emails.js';
+import e, { request, response } from 'express';
 
 const formularioLogin = (request, response) => {
     response.render('auth/login', {
@@ -12,6 +13,7 @@ const formularioLogin = (request, response) => {
 const formularioRegister = (request, response) => {
     response.render('auth/register', {
         page: "Crea una nueva cuenta...",
+        csrfToken : request.csrfToken()
 
     });
 };
@@ -131,4 +133,74 @@ const confirm = async (request, response) => {
 
 };
 
-export { formularioLogin, formularioRegister, formularioPasswordRecovery, createNewUser, confirm };
+    const passwordReset = async  (request, response)=>{
+       // Validación de los campos que se reciben del formulario
+       console.log("Validando los datos para la contraseña  ")
+   
+await check('correo_usuario')
+    .notEmpty().withMessage("El correo electrónico es un campo obligatorio.")
+    .isEmail().withMessage("Debe ingresar un correo electrónico válido.")
+    .run(request);
+
+    let result = validationResult(request)
+        
+    //Verificamos si hay errores de validacion
+    if(!result.isEmpty())
+    {
+        return response.render("auth/passwordRecovery", {
+            page: 'Error al intentar resetear la contraseña',
+            errors: result.array(),
+            
+        })
+    }
+    
+    //Desestructurar los parametros del request
+    const {correo_usuario:email} = request.body
+
+    //Verificar que el usuario no existe previamente en la bd
+    const existingUser = await User.findOne({ where: { email}})
+
+
+    if(existingUser)
+    { 
+        return response.render("auth/register", {
+        page: 'Error, no existe una cuenta asociada al correo electrónico ingresado',
+        csrfToken: request.csrfToken(),
+        errors: [{msg: `El usuario ${email} ya se encuentra registrado.` }],
+        user: {
+           email: email 
+        }
+    })
+    }
+         
+    /*console.log("Registrando a un nuevo usuario.")
+    console.log(request.body);*/
+
+    //Registramos los datos en la base de datos.
+        const newUser = await User.create({
+        name: request.body.nombre_usuario, 
+        email: request.body.correo_usuario,
+        password: request.body.pass_usuario,
+        token: generatetId()
+        }); 
+        //response.json(newUser); 
+
+    //Enviar el correo de confirmación
+    emailAfterRegister({
+        name: newUser.name,
+        email: newUser.email,
+        token: newUser.token 
+    })
+
+
+    response.render('templates/message', {
+        csrfToken: request.csrfToken(),
+        page: 'Cuenta creada satisfactoriamente.',
+        msg: 'Hemos enviado un correo a : <poner el correo aqui>, para la confirmación se cuenta.'
+    })
+    
+}
+
+
+
+export { formularioLogin, formularioRegister, formularioPasswordRecovery, createNewUser, confirm, passwordReset };
