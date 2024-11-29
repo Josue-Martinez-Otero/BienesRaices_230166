@@ -19,12 +19,6 @@ dotenv.config({path: '.env'})
 // Instanciar nuestra aplicación web
 const app = express()
 
-// Habilitar Cookie Parser 
-app.use(cookieParser())
-
-// Habilitar CSRF
-app.use(csrf({cookie: true}))
-
 //Conexión a la base de datos
 try {
     await db.authenticate(); //Verifico las credenciales del usuario
@@ -42,6 +36,11 @@ try {
 
 //Habilitando la lectura de datos del formulario
 app.use(express.urlencoded({ extended: true }));
+// Habilitar Cookie Parser 
+app.use(cookieParser())
+
+// Habilitar CSRF
+app.use(csrf({cookie: true}))
 
 
 //Habilitar PUG

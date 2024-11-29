@@ -1,5 +1,5 @@
 import express from 'express';
-import { formularioLogin, formularioRegister, formularioPasswordRecovery, createNewUser, confirm, passwordReset } from '../controllers/userController.js'
+import { formularioLogin, formularioRegister, formularioPasswordRecovery, createNewUser, confirm, passwordReset, updatePassword,verifyTokenPasswordChange } from '../controllers/userController.js'
 const router = express.Router();
 
 //GET - Se utiliza para la lectura de datos e información del servidor al cliente 
@@ -48,6 +48,10 @@ router.get("/login", formularioLogin /*middleware*/ )
  router.get("/confirmAccount/:token",confirm) 
  router.get("/passwordRecovery", formularioPasswordRecovery)
  router.post("/passwordRecovery", passwordReset)
+
+ //Actualizar contraseña
+ router.get("/passwordRecovery/:token", verifyTokenPasswordChange)
+ router.post("/passwordRecovery/:token", updatePassword)
  
 
 export default router
