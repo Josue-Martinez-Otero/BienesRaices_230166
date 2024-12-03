@@ -28,7 +28,7 @@ dotenv.config({path: '.env'})
                 <p>Te damos la bienvenida a <strong>BienesRaices-230166</strong>, la plataforma donde podrás buscar, comprar y ofertar propiedades de manera segura.</p>
                 <p>Para comenzar a utilizar la plataforma, solo necesitas confirmar tu cuenta. Haz clic en el siguiente enlace para activarla:</p>
                 <p style="text-align: center;">
-                    <a href="${process.env.BACKED_DOMAIN}:${process.env.BACKEND_PORT}/confirmAccout/${token}" 
+                    <a href="${process.env.BACKEND_DOMAIN}:${process.env.BACKEND_PORT}/confirmAccout/${token}" 
                     style="background-color: #2D87F0; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;">
                         Confirmar Cuenta
                     </a>
@@ -39,7 +39,7 @@ dotenv.config({path: '.env'})
                 <br>
             <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ccc; text-align: center; font-size: 14px; color: #666;">
             <h1>Contáctanos para mayor información</h1>
-            <img src="/img/Firma.png" alt="Firma CEO de BienesRaices" style="max-width: 200px; height: auto; margin-bottom: 10px;">
+            <img src="https://i.imgur.com/zbHa3eP.png" alt="Firma CEO de BienesRaices" style="max-width: 200px; height: auto; margin-bottom: 10px;">
             <p>Atentamente,<br><strong>El equipo de BienesRaices-230166</strong></p>
             <p><i>Visítanos en: <a href="bienesraices-230166" style="color: #2D87F0;">bienesraices-230166.com</a></i></p>
             <p><i>Correo de contacto: <a href="mailto:contacto@bienesraices-230166.com" style="color: #2D87F0;">contacto@bienesraices-230166.com</a></i></p>
@@ -75,7 +75,7 @@ const emailChangePassword = async (userData) =>{
                 <p>Te damos la bienvenida a <strong>BienesRaices-230166</strong>, la plataforma donde podrás buscar, comprar y ofertar propiedades de manera segura.</p>
                 <p>Para comenzar a utilizar la plataforma, solo necesitas confirmar tu cuenta. Haz clic en el siguiente enlace para activarla:</p>
                 <p style="text-align: center;">
-                    <a href="${process.env.BACKED_DOMAIN}:${process.env.BACKEND_PORT}/confirmAccout/${token}" 
+                    <a href="${process.env.BACKEND_DOMAIN}:${process.env.BACKEND_PORT}/confirmAccout/${token}" 
                     style="background-color: #2D87F0; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;">
                         Confirmar Cuenta
                     </a>

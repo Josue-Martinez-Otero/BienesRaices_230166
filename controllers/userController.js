@@ -1,8 +1,9 @@
+import { request, response } from 'express';
 import { check, validationResult } from 'express-validator';
 import User from '../models/User.js';
 import { generatetId } from '../models/helpers/tokens.js';
 import { emailAfterRegister, emailChangePassword } from '../models/helpers/emails.js';
-import e, { request, response } from 'express';
+
 
 const formularioLogin = (request, response) => {
     response.render('auth/login', {
