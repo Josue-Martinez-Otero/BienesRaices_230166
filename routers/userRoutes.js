@@ -7,6 +7,7 @@ import {
     confirm, 
     passwordReset, 
     verifyTokenPasswordChange, 
+    userAuthentication,
     updatePassword 
 } from '../controllers/userController.js';
 
@@ -50,6 +51,7 @@ router.delete("/deleteUser/:email", (request, response) => {
 
 // Rutas de autenticación y recuperación de contraseña
 router.get("/login", formularioLogin )
+router.post("/login", userAuthentication)
  router.get("/createAccount", formularioRegister)
  router.get("/confirmAccount/:token", confirm)
  router.get("/passwordRecovery", formularioPasswordRecovery)

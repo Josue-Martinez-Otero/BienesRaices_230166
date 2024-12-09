@@ -208,4 +208,73 @@ const updatePassword = async (request, response) => {
     });
 };
 
-export {formularioLogin, formularioRegister, formularioPasswordRecovery, createNewUser, confirm, passwordReset, verifyTokenPasswordChange, updatePassword}
+const userAuthentication =  async(request, response) =>
+    {
+
+        const {correo_usuario:email , pass_usuario:password} = request.body;
+
+        console.log(`El usuario esta intentando acceder con las credenciles usuario: ${email} y la constraseña: ${password}...`)
+
+        // Validar datos desde front
+        await check('correo_usuario').notEmpty().withMessage("El correo electrónico es un campo obligatorio.").isEmail().withMessage("El correo electrónico no tiene el formato de: usuario@dominio.extesion").run(request)
+
+        await check('pass_usuario').notEmpty().withMessage("La contraseña es un campo obligatorio.").isLength({min:8}).withMessage("La constraseña debe ser de almenos 8 carácteres.").run(request)
+        
+        let result = validationResult(request)
+    
+        //Verificamos si hay errores de validacion
+        if(!result.isEmpty())
+        {
+            return response.render("auth/login", {
+                page: 'Login',
+                errors: result.array(),
+                csrfToken: request.csrfToken()
+            })
+        }   
+
+        // revisar que exista la cuenta
+        const existingUser = await User.findOne({where:{email}})
+        // revisar quee la cuenta y la contraseña coincidan con la bd
+
+        if(!existingUser)
+        {
+            return response.render("auth/login", {
+                page: 'Login',
+                csrfToken: request.csrfToken(),
+                errors: [{msg: `Error, no existe una cuenta asociada a este correo.` }],
+                                
+            })
+        }
+
+        // Verificar que la cuenta este confirmada
+        
+        if(!existingUser.confirmed)
+        {
+            return response.render("auth/login", {
+                page: 'Login',
+                csrfToken: request.csrfToken(),
+                errors: [{msg: `Por favor revisa tu correo electrónico y confirma tu cuenta.` }],
+                                
+            })
+        }
+        else{
+
+            if(!existingUser.passwordVerify(password))
+            {
+                return response.render("auth/login", {
+                    page: 'Login',
+                    csrfToken: request.csrfToken(),
+                    errors: [{msg: `La contraseña es incorrecta.` }],
+                                    
+                })
+            }
+        }
+
+        //    Si - Renderizar el index
+        //    No - Mostrar errores
+
+        return 0;
+
+    }
+
+export {formularioLogin, formularioRegister, formularioPasswordRecovery, createNewUser, confirm, passwordReset, verifyTokenPasswordChange, updatePassword, userAuthentication}
