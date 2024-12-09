@@ -1,5 +1,11 @@
+
 //const router = express.Router();
+//Librerias Globales
 import express from 'express';
+import csrf from 'csurf'
+import cookieParser from 'cookie-parser';
+
+//librerias especificoas del proyecto
 import generalRoutes from './routers/generalRoutes.js'
 import userRoutes from './routers/userRoutes.js'
 import db from './db/config.js'
@@ -30,6 +36,11 @@ try {
 
 //Habilitando la lectura de datos del formulario
 app.use(express.urlencoded({ extended: true }));
+// Habilitar Cookie Parser 
+app.use(cookieParser())
+
+// Habilitar CSRF
+app.use(csrf({cookie: true}))
 
 
 //Habilitar PUG
@@ -56,4 +67,3 @@ app.get("/",function(req,res){
 app.use('/',generalRoutes);
 app.use('/auth',userRoutes);
 //export default router;
-

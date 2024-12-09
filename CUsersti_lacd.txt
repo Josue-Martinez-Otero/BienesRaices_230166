@@ -1,0 +1,72 @@
+C:\Users\ti_la>cd/
+
+C:\>cd "program files"
+
+C:\Program Files>cd mysql
+
+C:\Program Files\MySQL>cd "mysql server 8.0"
+
+C:\Program Files\MySQL\MySQL Server 8.0>cd bin
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u root -p --port=3307
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE USER 'Uriel.Medina'@'%' IDENTIFIED BY '123456'
+    -> ;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE DATABASE bienes_raices_230768;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> GRANT SELECT, UPDATE, INSERT, DELETE, ALTER, CREATE, DROP ON bienes_raices_230768.* TO 'Uriel.Medina'@'%';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SHOW GRANTs FOR 'Uriel.Medina'@'%';
++-------------------------------------------------------------------------------------------------------------+
+| Grants for Uriel.Medina@%                                                                                   |
++-------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `Uriel.Medina`@`%`                                                                    |
+| GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER ON `bienes_raices_230768`.* TO `Uriel.Medina`@`%` |
++-------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> ^C
+mysql> exit
+Bye
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u Uriel.Medina -p --port=3307
+Enter password: ******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++----------------------+
+| Database             |
++----------------------+
+| bienes_raices_230768 |
+| information_schema   |
+| performance_schema   |
++----------------------+
+3 rows in set (0.02 sec)
+
+mysql>
