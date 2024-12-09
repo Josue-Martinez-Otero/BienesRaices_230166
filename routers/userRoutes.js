@@ -49,7 +49,7 @@ router.delete("/deleteUser/:email", (request, response) => {
 });
 
 // Rutas de autenticación y recuperación de contraseña
-router.get("/login", formularioLogin /*middleware*/ )
+router.get("/login", formularioLogin )
  router.get("/createAccount", formularioRegister)
  router.get("/confirmAccount/:token", confirm)
  router.get("/passwordRecovery", formularioPasswordRecovery)
